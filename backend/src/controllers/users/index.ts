@@ -2,11 +2,13 @@ import { Router } from 'express'
 import { list } from './list'
 import { create } from './create'
 import { findById } from './findById'
+import { update } from './update'
 const userRouter = Router()
 
 userRouter.get('/', list)
 userRouter.get('/:id', findById)
 userRouter.post('/', create)
+userRouter.put('/:id', update)
 // router.delete('/:id', require('./remove'))
 
 export { userRouter }
