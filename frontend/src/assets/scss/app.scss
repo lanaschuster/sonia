@@ -1,0 +1,43 @@
+@import "~bulma/sass/utilities/initial-variables";
+@import "~bulma/sass/utilities/functions";
+
+@import "helpers";
+@import "variables";
+
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
+
+@import 'overrides';
+
+// customizations
+.table td {
+    vertical-align: middle;
+}
+.table td button {
+    width: 35px;
+}
+
+// delete confirmation message 
+.delete-message {
+    top: 5px;
+    position: relative;
+    font-size: 1.2rem;
+}
+
+// logo text
+@font-face {
+    font-family: Stabillo;
+    src: url("../fonts/stabillo.ttf");
+}
+.logo-text {
+    font-family: "Stabillo", "Helvetica", "Arial", sans-serif;
+}
+span.logo-text {
+    font-size: 2.2em;
+}
+
+// adjustments to the avatar class
+.avatar {
+    margin-top: -90px;
+    padding-bottom: 10px;
+}
