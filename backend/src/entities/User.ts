@@ -1,4 +1,5 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import bcrypt from 'bcrypt'
 
 @Entity({
   schema: 'administration'
@@ -26,4 +27,12 @@ export class User {
     nullable: true
   })
   passwordResetExpires: Date
+
+  public encodePassword(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(7))
+  }
+
+  public checkPassword(password, hash, callback) {
+    return bcrypt.compare(password, hash, callback)
+  }
 }
