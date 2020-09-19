@@ -20,12 +20,12 @@ export default class UserSessionModule extends VuexModule {
   @MutationAction({ rawError: true, mutate: ['token', 'principal'] })
   public async login(credencial: Credential) {
     const token: Token = await new TokenClient().requestToken(credencial)
-    Vue.prototype.$cookies.set(userSessionKey, { token: token.access_token, principal: {} })
+    Vue.prototype.$cookies.set(userSessionKey, { token: token.accessToken, principal: {} })
 
     const principal: Principal = await new UserSessionClient().me()
-    Vue.prototype.$cookies.set(userSessionKey, { token: token.access_token, principal: principal })
+    Vue.prototype.$cookies.set(userSessionKey, { token: token.accessToken, principal: principal })
 
-    return { token: token.access_token, principal: principal }
+    return { token: token.accessToken, principal: principal }
   }
 
   @Action({ rawError: true })

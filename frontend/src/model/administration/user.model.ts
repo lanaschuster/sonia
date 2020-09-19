@@ -5,11 +5,11 @@ export class User extends BaseClass {
   email!: string
   username!: string
   password!: string
-  is_active!: boolean
+  isActive!: boolean
   confirmPassword!: string
 
   constructor() {
     super()
-    this.is_active = true
+    this.isActive = true
   }
 }

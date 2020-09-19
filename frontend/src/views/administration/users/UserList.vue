@@ -68,7 +68,7 @@
             @select="onLineSelected">
             <template slot-scope="props">
               <b-table-column field="ativo" label="Status" width="5%" sortable>
-                <b-tag v-if="props.row.is_active" type="is-success">Ativo</b-tag>
+                <b-tag v-if="props.row.isActive" type="is-success">Ativo</b-tag>
                 <b-tag v-else type="is-warning">Inativo</b-tag>
               </b-table-column>
               <b-table-column field="name" label="Nome" sortable>

@@ -29,6 +29,6 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-routes(app, undefined)
+routes(app)
 
 export { app }
