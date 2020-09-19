@@ -40,7 +40,7 @@ const list = async (req, res) => {
   return res.status(200).json({
     currentPage,
     totalPages,
-    total,
+    totalItems: total,
     content: users
   })
 }
