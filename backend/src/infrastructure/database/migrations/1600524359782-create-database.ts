@@ -7,10 +7,12 @@ export class createDatabase1600524359782 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE SCHEMA IF NOT EXISTS "administration" AUTHORIZATION "sa_sonia"`);
+        await queryRunner.query(`CREATE SCHEMA IF NOT EXISTS "registration" AUTHORIZATION "sa_sonia"`);
     }
     
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`DROP SCHEMA IF EXISTS "administration"`);
+        await queryRunner.query(`DROP SCHEMA IF EXISTS "administration" CASCADE`);
+        await queryRunner.query(`DROP SCHEMA IF EXISTS "registration" CASCADE`);
     }
 
 }

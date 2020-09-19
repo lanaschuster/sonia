@@ -1,5 +1,4 @@
 import { createConnection } from 'typeorm'
-import {User} from '../../entities/User'
 import 'reflect-metadata'
 
 const connection = createConnection({
@@ -11,7 +10,7 @@ const connection = createConnection({
     password: 'sa_sonia',
     database: 'sonia',
     synchronize: true,
-    entities: [User],
+    entities: ['src/entities/*.ts'],
     migrations: ['src/infrastructure/database/migrations/*.{ts,js}'],
     cli: {
         migrationsDir: 'src/infrastructure/database/migrations'
