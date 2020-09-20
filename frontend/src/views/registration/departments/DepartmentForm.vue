@@ -227,7 +227,7 @@
                   type="is-danger"
                   class="has-margin-left-7"
                   icon-left="trash-can-outline"
-                  @click.prevent="removeMember(props.row.user.id)"/>
+                  @click.prevent="removeMember(props.row.id)"/>
               </div>
             </b-table-column>
           </template>
@@ -357,7 +357,7 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
         this.department = success
         this.loading = false
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.toastWarning(error)
         this.loading = false
       })
   }
@@ -366,8 +366,8 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
     this.loading = true
     this.workerClient.findByDepartmentId(+this.id)
       .then((success) => {
+        this.department.workers = success
         success.forEach(worker => {
-          this.department.workers.push(worker)
           if (worker.isManager) {
             this.manager = worker
           }
@@ -379,6 +379,7 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
 
         this.loading = false
       }).catch(error => {
+        console.log(error)
         this.toastWarning(error.data.error)
         this.loading = false
       })
@@ -522,16 +523,30 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
   private addUser(): void {
     let worker = new Worker()
     worker.user = new User()
+    worker.department = new Department()
     Object.assign(worker.user, this.user)
-    this.department.workers.push(worker)
+
+    if (this.adding()){
+      this.department.workers.push(worker)
+    } else {
+      Object.assign(worker.department, this.department)
+
+      this.workerClient.save(worker)
+        .then(success => {
+          this.loadWorkers()
+        })
+        .catch(error => {
+          this.toastWarning(error.data.error)
+        })
+    }
+
     this.user = new User()
   }
 
   private removeMember(id: number): void {
-    console.log(id)
     this.workerClient.delete(id)
       .then(() => {
-        this.department.workers = this.department.workers.filter(worker => worker.user.id !== id)
+        this.loadWorkers()
       }).catch(error => {
         this.toastWarning(error.data.error)
       })
@@ -540,10 +555,10 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
   private createDepartment(): void {
     this.departmentClient.save(this.department)
       .then((success) => {
-        this.createWorkers(success)
         this.toastSuccess('Departamento cadastrado com sucesso.')
         this.$router.push({ name: 'departments' })
       }).catch(error => {
+        console.log(error)
         this.toastWarning(error.data.error)
       })
   }
