@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt'
 import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany } from 'typeorm'
 import { Authorization } from './Authorization'
+import { Worker } from './Worker'
 
 @Entity({
   schema: 'administration'
@@ -31,6 +32,9 @@ export class User {
 
   @OneToMany(type => Authorization, authorization => authorization.user)
   permissions: Authorization[]
+
+  @OneToMany(type => Worker, worker => worker.user)
+  workers: Worker[]
 
   public encodePassword(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(7))
