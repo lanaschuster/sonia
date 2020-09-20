@@ -208,7 +208,7 @@
         <b-table
           hoverable
           :loading="loading"
-          :data="members">
+          :data="department.workers">
           <template slot-scope="props">
             <b-table-column field="name" label="Nome">
               {{ props.row.user.name }}
@@ -310,8 +310,6 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
   private user: User = new User()
   private pageRequest: UserPageRequest = new UserPageRequest()
   private pageResponse: PageResponse<User> = new PageResponse()
-  
-  private members: Worker[] = []
 
   @Prop({
     type: String,
@@ -369,12 +367,12 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
     this.workerClient.findByDepartmentId(+this.id)
       .then((success) => {
         success.forEach(worker => {
-          this.members.push(worker)
-          if (worker.is_manager) {
+          this.department.workers.push(worker)
+          if (worker.isManager) {
             this.manager = worker
           }
 
-          if (worker.is_substitute) {
+          if (worker.isSubstitute) {
             this.substitute = worker
           }
         })
@@ -426,10 +424,10 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
 
   private selectManager(option: User): void {
     if (!option) return
-    this.manager.is_manager = true
-    this.manager.is_substitute = false
+    this.manager.isManager = true
+    this.manager.isSubstitute = false
     Object.assign(this.manager.user, option)
-    this.members.push(this.manager)
+    this.department.workers.push(this.manager)
   }
 
   private searchSubstitute(event: string, scrollEnd = false): void {
@@ -472,10 +470,10 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
 
   private selectSubstitute(option: User): void {
     if (!option) return
-    this.substitute.is_manager = false
-    this.substitute.is_substitute = true
+    this.substitute.isManager = false
+    this.substitute.isSubstitute = true
     Object.assign(this.substitute.user, option)
-    this.members.push(this.substitute)
+    this.department.workers.push(this.substitute)
   }
 
   private searchUser(event: string, scrollEnd = false): void {
@@ -525,7 +523,7 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
     let worker = new Worker()
     worker.user = new User()
     Object.assign(worker.user, this.user)
-    this.members.push(worker)
+    this.department.workers.push(worker)
     this.user = new User()
   }
 
@@ -533,7 +531,7 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
     console.log(id)
     this.workerClient.delete(id)
       .then(() => {
-        this.members = this.members.filter(member => member.user.id !== id)
+        this.department.workers = this.department.workers.filter(worker => worker.user.id !== id)
       }).catch(error => {
         this.toastWarning(error.data.error)
       })
@@ -551,9 +549,9 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
   }
 
   private createWorkers(department: Department): void {
-    this.members.forEach(member => {
-      member.department = department
-      this.workerClient.save(member)
+    this.department.workers.forEach(worker => {
+      worker.department = department
+      this.workerClient.save(worker)
         .catch(error => {
           this.toastWarning(error.data.error)
         })
