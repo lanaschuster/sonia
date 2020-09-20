@@ -1,4 +1,4 @@
-import { getConnection, Like } from 'typeorm'
+import { getConnection } from 'typeorm'
 import { User } from '../../entities/User'
 
 const findById = async (req, res) => {
