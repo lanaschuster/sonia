@@ -3,16 +3,26 @@ import { User } from '../../entities/User'
 
 const findById = async (req, res) => {
   const UserRepository = getConnection('sonia').getRepository(User)
-  const results = await UserRepository.findByIds(req.params.id)
+  const user = await UserRepository.findOne({
+    where: {
+      id: req.params.id
+    },
+    relations: ['permissions']
+  })
   
-  if (results.length <= 0) {
+  if (!user) {
     return res.status(404).json({
       message: 'Usuário não existe'
     })
   }
   
-  const user = results[0]
   user.password = undefined
+  let permissions = []
+  user.permissions.forEach(permission => {
+    permissions.push(permission.permission)
+  })
+
+  user.permissions = permissions
   return res.status(200).json(user)
 }
 

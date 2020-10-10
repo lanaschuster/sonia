@@ -107,6 +107,26 @@
           </b-field>
         </validation-provider>
       </div>
+      <div class="column is-4">
+        <validation-provider
+          rules="required"
+          v-slot="{ errors, valid }"
+          name="Tipo" >
+          <b-field 
+            label="Permissão"
+            :message="errors"
+            :type="{ 'is-danger': errors[0], 'is-success': valid }">
+            <b-taginput
+              autocomplete
+              :data="permissions"
+              v-model="user.permissions"
+              maxtags="1"
+              icon="label"
+              placeholder="Selecione uma permissão">
+            </b-taginput>
+          </b-field>
+        </validation-provider>
+      </div>
       <div class="column is-12 has-text-right">
         <span v-if="deleting"
           class="is-inline has-margin-right-5 has-text-danger delete-message">
@@ -148,11 +168,14 @@ import FormUtilities from '../../../mixins/form-utilities.mixin'
 
 import { User } from '../../../model/administration/user.model'
 import { UserClient } from '../../../client/administration/user.client'
+import { PermissionType } from '../../../model/administration/permission.enum';
 
 @Component
 export default class UserForm extends Mixins(FormUtilities) {
   private user: User = new User()
   private userClient!: UserClient
+
+  private permissions = Object.keys(PermissionType)
 
   @Prop({
     type: String,
@@ -196,6 +219,7 @@ export default class UserForm extends Mixins(FormUtilities) {
   }
 
   private createUser(): void {
+    
     this.userClient.save(this.user)
       .then((success) => {
         this.toastSuccess('Usuário cadastrado com sucesso.')

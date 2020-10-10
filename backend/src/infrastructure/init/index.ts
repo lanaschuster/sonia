@@ -5,6 +5,9 @@ import bcrypt from 'bcrypt'
 const initialTask = async () => {
 
   const UserRepository = getConnection('sonia').getRepository(User)
+
+  const found = UserRepository.findOne({ username: 'admin' })
+  if (found) return
   
   const user = UserRepository.create({
     username: 'admin',
