@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
+import { Planning } from './Planning'
 import { Worker } from './Worker'
 
 @Entity({
@@ -16,4 +17,7 @@ export class Department {
 
   @OneToMany(type => Worker, worker => worker.department)
   workers: Worker[]
+
+  @OneToMany(type => Planning, planning => planning.department)
+  plannings: Planning[];
 }

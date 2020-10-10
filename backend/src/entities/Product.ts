@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm'
+import { Planning } from './Planning'
 
 enum ProductType {
   PRODUCT = 'PRODUCT',
@@ -27,4 +28,7 @@ export class Product {
     default: ProductType.PRODUCT
   })
   type: ProductType
+
+  @ManyToMany(type => Planning, planning => planning.products)
+  plannings: Planning[];
 }
