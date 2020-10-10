@@ -161,6 +161,18 @@ const routes: Array<RouteConfig> = [
         path: '',
         name: 'shopping',
         component: ShoppingLayout
+      },
+      {
+        path: 'plannings',
+        redirect: 'plannings',
+        component: ShoppingLayout,
+        children: [
+          {
+            path: '',
+            name: 'plannings',
+            component: () => import(/* webpackChunkName: "plannings" */ '@/views/shopping/planning/PlanningList.vue')
+          }
+        ]
       }
     ]
   },

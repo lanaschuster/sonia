@@ -5,8 +5,9 @@
         <b-menu-list label="Compras">
           <b-menu-item
             tag="router-link"
-            label="Planejamento"/>
-          <b-menu-item
+            label="Planejamento"
+            :to="{ name: 'plannings' }"/>
+          <!-- <b-menu-item
             tag="router-link"
             label="Solicitação de compra"/>
           <b-menu-item
@@ -14,7 +15,7 @@
             label="Cotações"/>
           <b-menu-item
             tag="router-link"
-            label="Aprovações"/>
+            label="Aprovações"/> -->
         </b-menu-list>
       </b-menu>
     </aside>
