@@ -1,3 +1,4 @@
+import { User } from '../administration/user.model'
 import { BaseClass } from '../base-class'
 import { Department } from '../registration/department.model'
 import { Product } from '../registration/product.model'
@@ -8,14 +9,13 @@ export class Planning extends BaseClass {
   purchaseDate!: Date
   description !: string
   code!: string
-  requesterName!: string
   budget!: number
   department!: Department
-  products!: Product[]
+  requester!: User
 
   constructor () {
     super()
-    this.products = []
+    this.requester = new User()
     this.department = new Department()
   }
 }

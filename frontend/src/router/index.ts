@@ -171,6 +171,11 @@ const routes: Array<RouteConfig> = [
             path: '',
             name: 'plannings',
             component: () => import(/* webpackChunkName: "plannings" */ '@/views/shopping/planning/PlanningList.vue')
+          },
+          {
+            path: 'add',
+            name: 'plannings.add',
+            component: () => import(/* webpackChunkName: "plannings" */ '@/views/shopping/planning/PlanningForm.vue')
           }
         ]
       }

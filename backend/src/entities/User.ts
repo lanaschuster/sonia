@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt'
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
 import { Authorization } from './Authorization'
+import { Planning } from './Planning'
 import { Worker } from './Worker'
 
 @Entity({
@@ -35,6 +36,9 @@ export class User {
 
   @OneToMany(type => Worker, worker => worker.user)
   workers: Worker[]
+
+  @OneToMany(type => Planning, planning => planning.requester)
+  plannings: Planning[];
 
   public encodePassword(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(7))

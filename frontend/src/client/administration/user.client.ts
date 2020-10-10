@@ -48,6 +48,15 @@ export class UserClient {
     }
   }
 
+  public async findByUsername(username: string): Promise<User> {
+    try {
+      const response = await this.axiosClient.get<User>(`/${username}/username`)
+      return response.data
+    } catch (error) {
+      return Promise.reject(error.response)
+    }
+  }
+
   public async find(pageRequest: UserPageRequest): Promise<PageResponse<User>> {
     try {
       let requestPath = `?page=${pageRequest.page}&size=${pageRequest.size}`

@@ -70,11 +70,14 @@
               <b-table-column field="code" label="Código" sortable>
                 {{ props.row.code }}
               </b-table-column>
-              <b-table-column field="department" label="Departamento" sortable>
+              <b-table-column field="department.name" label="Departamento" sortable>
                 {{ props.row.department.name }}
               </b-table-column>
-              <b-table-column field="requesterName" label="Solicitante" sortable>
-                {{ props.row.requesterName }}
+              <b-table-column field="requester.name" label="Solicitante" sortable>
+                {{ props.row.requester.name }}
+              </b-table-column>
+              <b-table-column field="category" label="Categoria" sortable>
+                {{ props.row.category }}
               </b-table-column>
               <b-table-column field="budget" label="Total" sortable>
                 {{ props.row.budget }}

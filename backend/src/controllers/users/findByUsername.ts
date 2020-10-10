@@ -1,19 +1,21 @@
 import { getConnection } from 'typeorm'
 import { User } from '../../entities/User'
 
-const findById = async (req, res) => {
+const findByUsername = async (req, res) => {
   const UserRepository = getConnection('sonia').getRepository(User)
-  const results = await UserRepository.findByIds(req.params.id)
+  const user = await UserRepository.findOne({
+    where: { username: req.params.username },
+    relations: ['workers', 'workers.department']
+  })
   
-  if (results.length <= 0) {
+  if (!user) {
     return res.status(404).json({
       message: 'Usuário não existe'
     })
   }
   
-  const user = results[0]
   user.password = undefined
   return res.status(200).json(user)
 }
 
-export { findById }
+export { findByUsername }

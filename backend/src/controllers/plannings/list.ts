@@ -22,7 +22,8 @@ const list = async (req, res) => {
   const [plannings, total] = await PlanningRepository.findAndCount({
     where: condition,
     take: limit,
-    skip: offset
+    skip: offset,
+    relations: ['department', 'requester']
   })
 
   const currentPage = page ? +page : 0;
