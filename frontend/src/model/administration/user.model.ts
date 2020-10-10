@@ -1,4 +1,5 @@
 import { BaseClass } from '../base-class'
+import { Worker } from '../registration/worker.model'
 import { Permission } from './permission.model'
 
 export class User extends BaseClass {
@@ -9,6 +10,7 @@ export class User extends BaseClass {
   isActive!: boolean
   confirmPassword!: string
   permissions!: Permission[]
+  workers!: Worker[]
   
   constructor() {
     super()

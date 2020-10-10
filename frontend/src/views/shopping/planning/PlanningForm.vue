@@ -62,7 +62,7 @@
             :type="{ 'is-danger': errors[0], 'is-success': valid }">
             <b-datepicker
               expanded
-              :disabled="detailing" 
+              :disabled="detailing || deleting" 
               v-model="planning.purchaseDate" 
               placeholder="Selecione a data prevista da compra">
             </b-datepicker>
@@ -104,7 +104,7 @@
             :type="{ 'is-danger': errors[0], 'is-success': valid }">
             <b-input
               type="number"
-              :disabled="detailing" 
+              :disabled="detailing || deleting" 
               v-model="planning.budget">
             </b-input>
           </b-field>
@@ -116,6 +116,7 @@
           type="is-success">
           <b-input
             type="textarea"
+            :disabled="detailing || deleting"
             v-model="planning.description"
             placeholder="Descrição e justificativa da compra prevista"/>
         </b-field>
@@ -204,18 +205,22 @@ export default class PlanningForm extends Mixins(FormUtilities) {
 
     if (!this.adding()) {
       this.loadPlanning()
+    } else {
+      this.loadRequesterData()
     }
 
-    this.loadRequesterData()
   }
 
   private adding(): boolean {
     return (!this.editing && !this.deleting && !this.detailing)
   }
 
-  private loadRequesterData(): void {
+  private loadRequesterData(): void {    
+    if (!this.userSessionModule.principal) return
+
     this.loading = true
     const username = this.userSessionModule.principal.username
+
     this.userClient.findByUsername(username)
       .then(success => {
         this.planning.requester = success
@@ -229,19 +234,18 @@ export default class PlanningForm extends Mixins(FormUtilities) {
     this.planningClient.findById(+this.id)
       .then((success) => {
         this.planning = success
+        this.planning.purchaseDate = new Date(success.purchaseDate)
       }).catch(error => {
         this.toastWarning(error.data.error)
       })
   }
 
   private createPlanning(): void {
-    console.log(this.planning)
     this.planningClient.save(this.planning)
       .then((success) => {
         this.toastSuccess('Planejamento cadastrado com sucesso.')
         this.$router.push({ name: 'plannings' })
       }).catch(error => {
-        console.log(error)
         this.toastWarning(error.data.error)
       })
   }
@@ -249,7 +253,7 @@ export default class PlanningForm extends Mixins(FormUtilities) {
   private updatePlanning(): void {
     this.planningClient.update(this.planning)
       .then((success) => {
-        this.toastSuccess('Produto ou serviço atualizado com sucesso.')
+        this.toastSuccess('Planejamento atualizado com sucesso.')
         this.$router.push({ name: 'plannings' })
       }).catch(error => {
         this.toastWarning(error.data.error)
@@ -259,7 +263,7 @@ export default class PlanningForm extends Mixins(FormUtilities) {
   private deletePlanning(): void {
     this.planningClient.delete(+this.id)
       .then((success) => {
-        this.toastSuccess('Produto ou serviço excluído com sucesso.')
+        this.toastSuccess('Planejamento excluído com sucesso.')
         this.$router.push({ name: 'plannings' })
       }).catch(error => {
         this.toastWarning(error.data.error)

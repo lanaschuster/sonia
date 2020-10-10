@@ -176,6 +176,24 @@ const routes: Array<RouteConfig> = [
             path: 'add',
             name: 'plannings.add',
             component: () => import(/* webpackChunkName: "plannings" */ '@/views/shopping/planning/PlanningForm.vue')
+          },
+          {
+            path: 'detail',
+            name: 'plannings.detail',
+            props: (route) => ({ id: route.params.id, detailing: true }),
+            component: () => import(/* webpackChunkName: "plannings" */ '@/views/shopping/planning/PlanningForm.vue')
+          },
+          {
+            path: 'edit',
+            name: 'plannings.edit',
+            props: (route) => ({ id: route.params.id, editing: true }),
+            component: () => import(/* webpackChunkName: "plannings" */ '@/views/shopping/planning/PlanningForm.vue')
+          },
+          {
+            path: 'delete',
+            name: 'plannings.delete',
+            props: (route) => ({ id: route.params.id, deleting: true }),
+            component: () => import(/* webpackChunkName: "plannings" */ '@/views/shopping/planning/PlanningForm.vue')
           }
         ]
       }

@@ -27,7 +27,7 @@ export class Planning {
   code: string
   @Column()
   category: string
-  @Column()
+  @Column('float')
   budget: number
 
   @ManyToOne(type => Department, department => department.plannings)
