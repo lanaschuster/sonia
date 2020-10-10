@@ -5,4 +5,5 @@ export class Product extends BaseClass {
   code!: string
   description!: string
   type !: string
+  category!: string
 }

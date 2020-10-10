@@ -15,7 +15,8 @@ const list = async (req, res) => {
     condition = [
       {name: Like(`%${filter}%`)}, 
       {code: Like(`%${filter}%`)},
-      {description: Like(`%${filter}%`)}
+      {description: Like(`%${filter}%`)},
+      {category: Like(`%${filter}%`)}
     ]
   }
 

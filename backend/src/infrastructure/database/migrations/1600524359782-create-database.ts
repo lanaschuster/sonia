@@ -10,7 +10,7 @@ export class createDatabase1600524359782 implements MigrationInterface {
         await queryRunner.query(`CREATE SCHEMA IF NOT EXISTS "registration" AUTHORIZATION "sa_sonia"`);
 
         await queryRunner.query(`CREATE TYPE registration.product_type_enum AS ENUM ('PRODUCT', 'SERVICE');`);        
-        await queryRunner.query(`CREATE TYPE administration.permission AS ENUM ('ADMINISTRATOR', 'USER');`);        
+        await queryRunner.query(`CREATE TYPE administration.permission AS ENUM ('ADMINISTRATOR', 'USER');`); 
     }       
     
     public async down(queryRunner: QueryRunner): Promise<void> {

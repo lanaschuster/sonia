@@ -14,7 +14,7 @@ const routes = (app) => {
   app.use('/api/me', jwtMiddleware, sessionRouter)
   app.use('/api/permissions', jwtMiddleware, permissionRouter)
   app.use('/api/departments', jwtMiddleware, departmentRouter)
-  app.use('/api/workers', workerRouter)
+  app.use('/api/workers', jwtMiddleware, workerRouter)
 }
 
 export { routes }

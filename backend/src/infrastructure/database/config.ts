@@ -1,3 +1,4 @@
+import { initialTask } from '../init/index'
 import { createConnection } from 'typeorm'
 import 'reflect-metadata'
 
@@ -16,6 +17,7 @@ const connection = createConnection({
         migrationsDir: 'src/infrastructure/database/migrations'
     }
 }).then(() => {
+    initialTask()
     console.log('Conectado ao banco de dados')
 }).catch(error => {
     console.log('Erro ao conectar com o banco de dados')

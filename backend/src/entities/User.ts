@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable, OneToMany } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
 import { Authorization } from './Authorization'
 import { Worker } from './Worker'
 

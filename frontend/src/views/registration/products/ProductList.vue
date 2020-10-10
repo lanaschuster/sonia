@@ -76,6 +76,9 @@
               <b-table-column field="descript" label="Descrição" sortable>
                 {{ props.row.description }}
               </b-table-column>
+              <b-table-column field="category" label="Categoria" sortable>
+                {{ props.row.category }}
+              </b-table-column>
               <b-table-column label="Ações" width="10%">
                 <div class="buttons is-right">
                   <b-button

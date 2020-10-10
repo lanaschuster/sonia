@@ -1,4 +1,5 @@
 import { BaseClass } from '../base-class'
+import { Permission } from './permission.model'
 
 export class User extends BaseClass {
   name!: string
@@ -7,9 +8,11 @@ export class User extends BaseClass {
   password!: string
   isActive!: boolean
   confirmPassword!: string
-
+  permissions!: Permission[]
+  
   constructor() {
     super()
     this.isActive = true
+    this.permissions = []
   }
 }

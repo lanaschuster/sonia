@@ -50,7 +50,7 @@ export class TokenClient {
     const data = new FormData()
     data.append('grant_type', 'refresh_token')
     data.append('username', username)
-    data.append('refresh_token', token.refresh_token)
+    data.append('refresh_token', token.refreshToken)
 
     try {
       const response = await this.axios.post<Token>('/token', data, this.configure())

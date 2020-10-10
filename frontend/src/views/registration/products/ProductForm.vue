@@ -37,7 +37,7 @@
       </div>
     </div>
     <validation-observer ref="formObserver" v-slot="{ passes, invalid }" class="columns is-multiline">
-      <div class="column is-4">
+      <div class="column is-6">
         <validation-provider
           rules="required"
           v-slot="{ errors, valid }"
@@ -50,7 +50,7 @@
           </b-field>
         </validation-provider>
       </div>
-      <div class="column is-4">
+      <div class="column is-6">
         <validation-provider
           rules="required"
           v-slot="{ errors, valid }"
@@ -63,7 +63,7 @@
           </b-field>
         </validation-provider>
       </div>
-      <div class="column is-4">
+      <div class="column is-6">
         <validation-provider
           rules="required"
           v-slot="{ errors, valid }"
@@ -82,6 +82,30 @@
                 :key="index"
                 :value="productType">
                   {{ productType === 'PRODUCT' ? 'Produto' : 'Serviço' }}
+              </option>
+            </b-select>
+          </b-field>
+        </validation-provider>
+      </div>
+      <div class="column is-6">
+        <validation-provider
+          rules="required"
+          v-slot="{ errors, valid }"
+          name="Tipo" >
+          <b-field 
+            label="Categoria"
+            :message="errors"
+            :type="{ 'is-danger': errors[0], 'is-success': valid }">
+            <b-select
+              required
+              expanded
+              :disabled="detailing || deleting"
+              v-model="product.category">
+              <option
+                v-for="(category, index) in categories"
+                :key="index"
+                :value="category">
+                  {{ category }}
               </option>
             </b-select>
           </b-field>
@@ -142,6 +166,7 @@ import FormUtilities from '../../../mixins/form-utilities.mixin'
 
 import { Product } from '../../../model/registration/product.model'
 import { ProductType } from '../../../model/registration/product-type.enum'
+import { Category } from '../../../model/registration/category.enum'
 import { ProductClient } from '../../../client/registration/product.client'
 
 @Component
@@ -149,6 +174,7 @@ export default class ProductForm extends Mixins(FormUtilities) {
   private product: Product = new Product()
   private productClient!: ProductClient
   private types = Object.keys(ProductType)
+  private categories = Object.keys(Category)
 
   @Prop({
     type: String,
