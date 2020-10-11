@@ -15,22 +15,11 @@ Vue.use(VueRouter)
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    redirect: 'home',
-    component: DefaultLayout,
-    children: [
-      {
-        path: '/home',
-        name: 'home',
-        component: HomeLayout
-      }
-    ]
-  }, {
-    path: '/dashboard',
     redirect: 'dashboard',
     component: DefaultLayout,
     children: [
       {
-        path: '',
+        path: '/dashboard',
         name: 'dashboard',
         component: DashboardLayout
       }

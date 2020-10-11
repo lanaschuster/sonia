@@ -3,7 +3,7 @@
     <div class="hero-head">
       <nav class="navbar">
         <div class="navbar-brand">
-          <a href="/home" class="navbar-item">
+          <a href="/dashboard" class="navbar-item">
             <span class="logo-text">Sonia</span>
           </a>
           <a class="navbar-item is-hidden-desktop"></a>

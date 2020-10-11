@@ -71,7 +71,7 @@ export default class Login extends Mixins(FormUtilities) {
   private mounted(): void {
     this.userSessionModule.load()
     if (this.userSessionModule.isLoggedIn) {
-      this.$router.push({ name: 'home' })
+      this.$router.push({ name: 'dashboard' })
     }
   }
 
@@ -84,7 +84,7 @@ export default class Login extends Mixins(FormUtilities) {
     this.userSessionModule.login(this.credential)
       .then(
         () => {
-          this.$router.push(this.$router.currentRoute.params.redirect || { name: 'home' })
+          this.$router.push(this.$router.currentRoute.params.redirect || { name: 'dashboard' })
           this.loading = false
         }
       ).catch(error => {
