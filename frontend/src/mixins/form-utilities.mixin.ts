@@ -6,7 +6,24 @@ import moment from 'moment'
 
 import EventBus from '@/components/event/event-bus'
 
-@Component
+@Component({
+  filters: {
+    formatDate(value: any) {
+      if (value) {
+        return moment(String(value)).format('DD/MM/YYYY')
+      }
+    },
+    formatDateTime(value: any) {
+      if (value) {
+        return moment(String(value)).format('DD/MM/YYYY hh:mm')
+      }
+    },
+    formatCurrency(value: any) {
+      let val = (value/1).toFixed(2).replace('.', ',')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+    }
+  }
+})
 class FormUtilities extends Vue {
   protected loading = false
   protected actionLoading = false

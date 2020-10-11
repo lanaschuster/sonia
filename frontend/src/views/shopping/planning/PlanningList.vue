@@ -80,10 +80,10 @@
                 {{ props.row.category }}
               </b-table-column>
               <b-table-column field="budget" label="Total" sortable>
-                {{ props.row.budget }}
+                {{ props.row.budget | formatCurrency}}
               </b-table-column>
               <b-table-column field="purchaseDate" label="Data da compra" sortable>
-                {{ props.row.purchaseDate }}
+                {{ props.row.purchaseDate | formatDate }}
               </b-table-column>
               <b-table-column label="Ações" width="10%">
                 <div class="buttons is-right">
