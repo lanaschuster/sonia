@@ -2,8 +2,8 @@ import 'reflect-metadata'
 import express from 'express'
 import morgan from 'morgan'
 import passport from 'passport'
-import flash from "express-flash"
-import session from "express-session"
+import flash from 'express-flash'
+import session from 'express-session'
 import cors from 'cors'
 
 import { routes } from './controllers/routes'

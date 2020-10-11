@@ -5,7 +5,8 @@ import { checkToken } from './check-token'
 const authRouter = Router()
 
 authRouter.post('/login', passport.authenticate("local-login"), login)
-authRouter.post('/check-token', checkToken)
+
+authRouter.post('/check-token',  checkToken)
 
 
 export { authRouter }

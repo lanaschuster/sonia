@@ -213,7 +213,7 @@ export default class ProductForm extends Mixins(FormUtilities) {
       .then((success) => {
         this.product = success
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
       })
   }
 
@@ -223,7 +223,7 @@ export default class ProductForm extends Mixins(FormUtilities) {
         this.toastSuccess('Produto ou serviço cadastrado com sucesso.')
         this.$router.push({ name: 'products' })
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
       })
   }
 
@@ -233,7 +233,7 @@ export default class ProductForm extends Mixins(FormUtilities) {
         this.toastSuccess('Produto ou serviço atualizado com sucesso.')
         this.$router.push({ name: 'products' })
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
       })
   }
 
@@ -243,7 +243,7 @@ export default class ProductForm extends Mixins(FormUtilities) {
         this.toastSuccess('Produto ou serviço excluído com sucesso.')
         this.$router.push({ name: 'products' })
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
       })
   }
 }

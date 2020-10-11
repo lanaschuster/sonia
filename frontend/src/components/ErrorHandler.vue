@@ -33,6 +33,7 @@ export default class ErrorHandler extends Vue {
         }
       }
     } else if (status === 401) {
+      console.log('push 401')
       this.$router.push({ name: '401' })
     } else if (status === 403) {
       this.$router.push({ name: '403' })

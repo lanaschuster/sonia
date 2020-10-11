@@ -357,7 +357,7 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
         this.department = success
         this.loading = false
       }).catch(error => {
-        this.toastWarning(error)
+        this.shouldLog(error)
         this.loading = false
       })
   }
@@ -380,7 +380,7 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
         this.loading = false
       }).catch(error => {
         console.log(error)
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
         this.loading = false
       })
   }
@@ -418,7 +418,7 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
           this.managerLoading = false
         }
       ).catch((error) => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
         this.managerLoading = false
       })
   }
@@ -464,7 +464,7 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
           this.substituteLoading = false
         }
       ).catch((error) => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
         this.substituteLoading = false
       })
   }
@@ -510,7 +510,7 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
           this.userLoading = false
         }
       ).catch((error) => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
         this.userLoading = false
       })
   }
@@ -536,7 +536,7 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
           this.loadWorkers()
         })
         .catch(error => {
-          this.toastWarning(error.data.error)
+          this.shouldLog(error)
         })
     }
 
@@ -548,7 +548,7 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
       .then(() => {
         this.loadWorkers()
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
       })
   }
 
@@ -559,7 +559,7 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
         this.$router.push({ name: 'departments' })
       }).catch(error => {
         console.log(error)
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
       })
   }
 
@@ -568,7 +568,7 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
       worker.department = department
       this.workerClient.save(worker)
         .catch(error => {
-          this.toastWarning(error.data.error)
+          this.shouldLog(error)
         })
     })
   }
@@ -579,7 +579,7 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
         this.toastSuccess('Departamento atualizado com sucesso.')
         this.$router.push({ name: 'departments' })
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
       })
   }
 
@@ -589,7 +589,7 @@ export default class DepartmentForm extends Mixins(FormUtilities) {
         this.toastSuccess('Departamento excluído com sucesso.')
         this.$router.push({ name: 'departments' })
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
       })
   }
 }

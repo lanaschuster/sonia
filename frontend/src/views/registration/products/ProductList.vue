@@ -144,9 +144,10 @@ export default class ProductList extends Mixins(FormUtilities) {
     this.productClient.find(this.pageRequest)
       .then(success => {
         this.pageResponse = success
-        this.loading = false
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
+      }).finally(() => {
+        this.loading = false
       })
   }
 

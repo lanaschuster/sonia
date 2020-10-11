@@ -214,7 +214,7 @@ export default class UserForm extends Mixins(FormUtilities) {
       .then((success) => {
         this.user = success
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
       })
   }
 
@@ -225,7 +225,7 @@ export default class UserForm extends Mixins(FormUtilities) {
         this.toastSuccess('Usuário cadastrado com sucesso.')
         this.$router.push({ name: 'users' })
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
       })
   }
 
@@ -235,7 +235,7 @@ export default class UserForm extends Mixins(FormUtilities) {
         this.toastSuccess('Usuário atualizado com sucesso.')
         this.$router.push({ name: 'users' })
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
       })
   }
 
@@ -245,7 +245,7 @@ export default class UserForm extends Mixins(FormUtilities) {
         this.toastSuccess('Usuário excluído com sucesso.')
         this.$router.push({ name: 'users' })
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
       })
   }
 }

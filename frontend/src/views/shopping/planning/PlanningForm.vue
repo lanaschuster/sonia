@@ -226,7 +226,7 @@ export default class PlanningForm extends Mixins(FormUtilities) {
         this.planning.requester = success
         this.planning.department = success.workers[0].department
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
       })
   }
 
@@ -236,7 +236,7 @@ export default class PlanningForm extends Mixins(FormUtilities) {
         this.planning = success
         this.planning.purchaseDate = new Date(success.purchaseDate)
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
       })
   }
 
@@ -246,7 +246,7 @@ export default class PlanningForm extends Mixins(FormUtilities) {
         this.toastSuccess('Planejamento cadastrado com sucesso.')
         this.$router.push({ name: 'plannings' })
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
       })
   }
 
@@ -256,7 +256,7 @@ export default class PlanningForm extends Mixins(FormUtilities) {
         this.toastSuccess('Planejamento atualizado com sucesso.')
         this.$router.push({ name: 'plannings' })
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
       })
   }
 
@@ -266,7 +266,7 @@ export default class PlanningForm extends Mixins(FormUtilities) {
         this.toastSuccess('Planejamento excluído com sucesso.')
         this.$router.push({ name: 'plannings' })
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
       })
   }
 }

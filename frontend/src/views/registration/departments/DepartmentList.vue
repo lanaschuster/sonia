@@ -140,7 +140,7 @@ export default class DepartmentList extends Mixins(FormUtilities) {
         this.pageResponse = success
         this.loading = false
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
       })
   }
 

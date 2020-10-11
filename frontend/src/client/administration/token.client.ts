@@ -31,7 +31,7 @@ export class TokenClient {
       return Promise.reject(error.response)
     }
   }
-
+  
   public async checkToken(token: Token): Promise<Token> {
     const data = {
       token: token
@@ -41,7 +41,6 @@ export class TokenClient {
       const response = await this.axios.post<Token>('/check-token', data, this.configure())
       return response.data
     } catch (error) {
-      console.log(error)
       return Promise.reject(error.response)
     }
   }

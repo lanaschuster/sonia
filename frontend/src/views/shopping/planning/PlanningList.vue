@@ -150,9 +150,10 @@ export default class PlanningList extends Mixins(FormUtilities) {
     this.planningClient.find(this.pageRequest)
       .then(success => {
         this.pageResponse = success
-        this.loading = false
       }).catch(error => {
-        this.toastWarning(error.data.error)
+        this.shouldLog(error)
+      }).finally(() => {
+        this.loading = false
       })
   }
 

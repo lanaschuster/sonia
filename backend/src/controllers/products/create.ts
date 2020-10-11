@@ -9,6 +9,7 @@ const create = async (req, res) => {
   const result = validator.validate(product)
   
   if (result.error) {
+    console.log(result.error)
     return res.status(400).json({
       message: result.error.details[0].message
     })

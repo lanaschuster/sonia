@@ -35,7 +35,7 @@ export default class UserSessionModule extends VuexModule {
     if (this.token) {
       new TokenClient().checkToken(this.token)
         .then(null, error => {
-          if (error.data.error === 'invalid_token') {
+          if (error.status === 401) {
             this.context.dispatch('logout')
             router.push({ name: 'login' })
           }
