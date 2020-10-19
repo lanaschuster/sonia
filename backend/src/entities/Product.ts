@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, OneToMany } from 'typeorm'
+import { PurchaseItem } from './PurchaseItem'
 
 enum ProductType {
   PRODUCT = 'PRODUCT',
@@ -27,4 +28,7 @@ export class Product {
     default: ProductType.PRODUCT
   })
   type: ProductType
+
+  @OneToMany(type => PurchaseItem, purchaseItem => purchaseItem.product)
+  purchaseItems: PurchaseItem[]
 }

@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
 import { Planning } from './Planning'
 import { Worker } from './Worker'
+import { PurchaseRequest } from './PurchaseRequest'
 
 @Entity({
   schema: 'registration'
@@ -19,5 +20,8 @@ export class Department {
   workers: Worker[]
 
   @OneToMany(type => Planning, planning => planning.department)
-  plannings: Planning[];
+  plannings: Planning[]
+
+  @OneToMany(type => PurchaseRequest, request => request.departments)
+  purchaseRequests: PurchaseRequest[]
 }

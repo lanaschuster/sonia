@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm'
 import { Department } from './Department'
+import { PurchaseRequest } from './PurchaseRequest'
 import { User } from './User'
 
 @Entity({
@@ -35,4 +36,7 @@ export class Planning {
 
   @ManyToOne(type => User, user => user.plannings)
   requester: User
+
+  @OneToMany(type => PurchaseRequest, purchaseRequest => purchaseRequest.planning)
+  purchaseRequests: PurchaseRequest[]
 }
