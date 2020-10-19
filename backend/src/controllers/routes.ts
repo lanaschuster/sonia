@@ -6,6 +6,7 @@ import { permissionRouter } from './permissions/index'
 import { departmentRouter } from './departments/index' 
 import { workerRouter } from './workers/index' 
 import { planningRouter } from './plannings/index' 
+import { purchaseRequestRouter } from './purchase-requests/index' 
 import { jwtMiddleware } from '../controllers/auth/jwt-middleware'
 
 const routes = (app) => {
@@ -17,6 +18,7 @@ const routes = (app) => {
   app.use('/api/departments', jwtMiddleware, departmentRouter)
   app.use('/api/workers', jwtMiddleware, workerRouter)
   app.use('/api/plannings', planningRouter)
+  app.use('/api/purchase-requests', purchaseRequestRouter)
 }
 
 export { routes }
